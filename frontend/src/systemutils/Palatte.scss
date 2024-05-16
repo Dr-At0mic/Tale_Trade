@@ -1,0 +1,20 @@
+$colors: (
+    primary: #121212,
+    secondary: #22201B,
+    third: #F6F6F6,
+    fourth: #FCDD1F,
+    fifth: #af9f33,
+);
+  @each $name, $value in $colors {
+    .bg-#{$name} {
+      background-color: #{$value};
+    }
+
+    .text-#{$name} {
+      color: #{$value};
+    }
+
+    .border-#{$name} {
+      border-color: #{$value};
+    }
+  }

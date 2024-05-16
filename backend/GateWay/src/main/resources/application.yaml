@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter:
+              replenishRate: 10
+              burstCapacity: 20
+              requestedTokens: 1
+        - name: Retry
+          args:
+            retries: 3
+            statuses: BAD_GATEWAY
+            methods: GET,POST
+            backoff:
+              firstBackoff: 10ms
+              maxBackoff: 50ms
+
+      routes:
+        - id: add_request_header_route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/auth/**
+
+server:
+  port: 8080
