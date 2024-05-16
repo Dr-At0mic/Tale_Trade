@@ -8,6 +8,7 @@ spring:
               replenishRate: 10
               burstCapacity: 20
               requestedTokens: 1
+              key-resolver: "#{@userRemoteAddressResolver}"
         - name: Retry
           args:
             retries: 3
@@ -22,6 +23,10 @@ spring:
           uri: http://localhost:8081
           predicates:
             - Path=/auth/**
+
+redis:
+  host: localhost
+  port: 6379
 
 server:
   port: 8080
